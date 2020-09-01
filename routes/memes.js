@@ -42,6 +42,13 @@ router.post('/newcat',(req,res)=>
         imgUrl:req.body.imgUrl,
         catname:req.body.catname
 
-    })
+    });
+    try{
+        const nc = newcat.save();
+        res.json(nc);
+    }catch(err)
+    {
+        res.json({msg:err});
+    }
 })
 module.exports = router;
