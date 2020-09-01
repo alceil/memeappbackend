@@ -36,6 +36,12 @@ router.post('/genMeme',async(req,res)=>
     }
 
 });
+router.post('/newcat',(req,res)=>
+{
+    const newcat= new NewCat({
+        imgUrl:req.body.imgUrl,
+        catname:req.body.catname
 
-
+    })
+})
 module.exports = router;
