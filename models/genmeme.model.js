@@ -9,4 +9,4 @@ const GenMeme = Schema(
     }
 );
 
-module.exports = mongoose.model("GenMeme",GenMeme);
+module.exports = mongoose.model("GenM",GenMeme);
