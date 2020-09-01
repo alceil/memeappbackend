@@ -41,7 +41,6 @@ router.post('/newcat',(req,res)=>
     const newcat= new NewCat({
         imgUrl:req.body.imgUrl,
         catname:req.body.catname
-
     });
     try{
         const nc = newcat.save();
