@@ -13,4 +13,4 @@ const AddMeme = Schema(
     }
 );
 
-module.exports = mongoose.model("AddM",AddMeme);
+module.exports = mongoose.model("AddMeme",AddMeme);

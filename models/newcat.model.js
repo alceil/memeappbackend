@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const GenMeme = Schema(
+const NewCat = Schema(
     {
         imgUrl:{
             type:String,
@@ -13,4 +13,4 @@ const GenMeme = Schema(
     }
 );
 
-module.exports = mongoose.model("GenMeme",GenMeme);
+module.exports = mongoose.model("NewCat",NewCat);
