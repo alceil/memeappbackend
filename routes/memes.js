@@ -28,9 +28,14 @@ router.post('/genMeme',async(req,res)=>
     });
     try
     {
-        
+        const savedgenmeme = await genMeme.save();
+        res.json(savedgenmeme);    
+    }
+    catch(err){
+        res.json({msg:err});
     }
 
 });
+
 
 module.exports = router;
