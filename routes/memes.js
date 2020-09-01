@@ -20,4 +20,17 @@ router.post('/addMeme',async (req,res)=>
 
     }
 });
+
+router.post('/genMeme',async(req,res)=>
+{
+    const genMeme = new GenMeme({
+        imgUrl:req.body.imgUrl,
+    });
+    try
+    {
+        
+    }
+
+});
+
 module.exports = router;
