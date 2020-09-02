@@ -13,7 +13,7 @@ router.post('/addMeme',async (req,res)=>
     try
     {
         const savedMeme = await addMeme.save();
-        res.json(savedMeme);
+        res.json(addMeme);
 
     }catch(err){
         res.json({msg:err});
@@ -36,18 +36,19 @@ router.post('/genMeme',async(req,res)=>
     }
 
 });
-router.post('/newcat',(req,res)=>
+router.post('/newcat',async (req,res)=>
 {
     const newcat= new NewCat({
         imgUrl:req.body.imgUrl,
         catname:req.body.catname
     });
     try{
-        const nc = newcat.save();
+        const nc = await newcat.save();
         res.json(nc);
     }catch(err)
     {
         res.json({msg:err});
     }
 })
+
 module.exports = router;

@@ -12,6 +12,6 @@ app.use('/memes',memeRoutes);
 app.get('/',(req,res)=>{
     res.send('We are sidkart')
 });
-mongoose.connect('mongodb+srv://kindi:ilmvm123@cluster0.zeniu.mongodb.net/Cluster0?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true },()=>console.log('Connected to db'));
+mongoose.connect('mongodb+srv://nemesisx:nemesisx@kindi.c110p.mongodb.net/kindi?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true },()=>console.log('Connected to db'));
 
 app.listen(3000);
