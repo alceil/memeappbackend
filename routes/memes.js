@@ -5,39 +5,39 @@ const GenMeme = require('../models/genmeme.model');
 const NewCat = require('../models/newcat.model');
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"./uploads");
-    },
-    filename:(req,file,cb)=>{
-        cb(null,req.body.username+".jpg");
-    }
-});
+// const storage = multer.diskStorage({
+//     destination:(req,file,cb)=>{
+//         cb(null,"./uploads");
+//     },
+//     filename:(req,file,cb)=>{
+//         cb(null,req.body.username+".jpg");
+//     }
+// });
 
-const FileFilter = (req,file,cb)=>{
-    if(file.mimetype=='image/jpg'||file.mimetype=='image/png'){
-        cb(null,true);
-    }
-        else{
-         cb(null,false);   
-        }
-    };
+// const FileFilter = (req,file,cb)=>{
+//     if(file.mimetype=='image/jpg'||file.mimetype=='image/png'){
+//         cb(null,true);
+//     }
+//         else{
+//          cb(null,false);   
+//         }
+//     };
 
- const upload = multer({
-     storage:storage,
-     limits:{
-         fileSize:1024 * 1024 * 6,
-     }
- });
+//  const upload = multer({
+//      storage:storage,
+//      limits:{
+//          fileSize:1024 * 1024 * 6,
+//      }
+//  });
  
- router.route('/add/image').patch(upload.single("img"),(req,res)=>{
-     AddMeme.findOneAndUpdate({username:req.body.name},
-        {
-            $set:{
-                imgUrl:req.file.path,
-            }
-        })
- });
+//  router.route('/add/image').patch(upload.single("img"),(req,res)=>{
+//      AddMeme.findOneAndUpdate({username:req.body.name},
+//         {
+//             $set:{
+//                 imgUrl:req.file.path,
+//             }
+//         })
+//  });
 
 
 
