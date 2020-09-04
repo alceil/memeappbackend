@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use('/memes',memeRoutes);
 
 app.get('/',(req,res)=>{
-    res.send('We are sidkart')
+    res.send('We are legion')
 });
 mongoose.connect('mongodb+srv://nemesisx:nemesisx@kindi.c110p.mongodb.net/kindi?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true },()=>console.log('Connected to db'));
 
