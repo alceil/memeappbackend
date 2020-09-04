@@ -31,13 +31,13 @@ const FileFilter = (req,file,cb)=>{
  });
  
  router.route('/add/image').patch(upload.single("img"),(req,res)=>{
-     AddMeme.findOneAndUpdate({username:req.body.name}
+     AddMeme.findOneAndUpdate({username:req.body.name},
         {
             $set:{
                 imgUrl:req.file.path,
             }
         })
- })
+ });
 
 
 
