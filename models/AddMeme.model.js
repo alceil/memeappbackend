@@ -8,7 +8,6 @@ const AddMeme = Schema(
         },
         catname:{
             type:String,
-            required:true
         }
     }
 );
