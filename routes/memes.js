@@ -35,8 +35,8 @@ router.route('/add/image').post(upload.single("img"),async (req,res)=>{
         imgUrl: req.file.path,
     });
     try {
-        const savedMeme = await addMeme.save();
-        res.json(savedMeme);
+//         const savedMeme = await addMeme.save();
+        res.json(addMeme);
 
     } catch (err) {
         res.json({ msg: err });
