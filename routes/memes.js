@@ -30,6 +30,7 @@ const FileFilter = (req,file,cb)=>{
      }
  });
  
+<<<<<<< HEAD
  router.route('/add/image').post(upload.single("img"),async (req,res)=>{
     //  AddMeme.findOneAndUpdate({username:req.body.name},
     //     {
@@ -37,6 +38,22 @@ const FileFilter = (req,file,cb)=>{
     //             imgUrl:req.file.path,
     //         }
     //     })
+=======
+router.route('/add/image').post(upload.single("img"),async (req,res)=>{
+    const addMeme = new AddMeme({
+        imgUrl: req.file.path,
+    });
+    try {
+//         const savedMeme = await addMeme.save();
+        res.json(addMeme);
+
+    } catch (err) {
+        res.json({ msg: err });
+
+    }
+ });
+
+>>>>>>> f647714567d58c7645501b7809a3f500b6bafaef
 
 
     const addMeme = new AddMeme({
