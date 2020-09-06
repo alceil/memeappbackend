@@ -30,13 +30,18 @@ const FileFilter = (req,file,cb)=>{
      }
  });
  
- router.route('/add/image').patch(upload.single("img"),(req,res)=>{
-     AddMeme.findOneAndUpdate({username:req.body.name},
-        {
-            $set:{
-                imgUrl:req.file.path,
-            }
-        })
+router.route('/add/image').post(upload.single("img"),async (req,res)=>{
+    const addMeme = new AddMeme({
+        imgUrl: req.file.path,
+    });
+    try {
+        const savedMeme = await addMeme.save();
+        res.json(savedMeme);
+
+    } catch (err) {
+        res.json({ msg: err });
+
+    }
  });
 
 
