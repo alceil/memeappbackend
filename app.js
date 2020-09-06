@@ -13,5 +13,8 @@ app.get('/',(req,res)=>{
     res.send('We are sidkart')
 });
 mongoose.connect('mongodb+srv://nemesisx:nemesisx@kindi.c110p.mongodb.net/kindi?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true },()=>console.log('Connected to db'));
-
+// mongoose
+// .connect('mongodb+srv://nemesisx:nemesisx@kindi.c110p.mongodb.net/kindi?retryWrites=true&w=majority')
+// .then(()=> console.log("connected"))
+// .catch((e)=>console.log(e));
 app.listen(3000);
