@@ -57,7 +57,7 @@ const upload = multer({
 
 
  
- router.route('/add/image').post(async function (request, response, next) {
+ router.post('/add/image',async function (request, response, next) {
     upload(request, response,  function (error) {
       if (error) {
         console.log(error);
