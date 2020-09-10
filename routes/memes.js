@@ -6,6 +6,7 @@ const aws = require('aws-sdk');
 const NewCat = require('../models/newcat.model');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
+require('dotenv').config();
 
 // const storage = multer.diskStorage({
 //     destination:(req,file,cb)=>{
@@ -37,6 +38,11 @@ aws.config.update({
     secretAccessKey: process.env.aws_secret_access_key
 });
 
+const spacesEndpoint = new aws.Endpoint('ams3.digitaloceanspaces.com');
+const s3 = new aws.S3({
+  endpoint: spacesEndpoint
+});
+
 const upload = multer({
     storage: multerS3({
       s3: s3,
@@ -50,15 +56,17 @@ const upload = multer({
   }).array('upload', 1);
 
 
-  
-app.post('/upload', function (request, response, next) {
-  
-});
  
- router.route('/add/image').post(upload.single("img"),async (req,res)=>{
-
- 
- });
+ router.route('/add/image').post(async function (request, response, next) {
+    upload(request, response,  function (error) {
+      if (error) {
+        console.log(error);
+      }
+       var name =request.files[0]['location'];
+      console.log('File uploaded successfully.');
+      response.json({"url":name});
+    }); 
+  });
 
 router.post('/addMeme', async (req, res) => {
     const addMeme = new AddMeme({
