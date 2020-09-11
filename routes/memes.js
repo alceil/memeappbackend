@@ -8,31 +8,6 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 require('dotenv').config();
 
-// const storage = multer.diskStorage({
-//     destination:(req,file,cb)=>{
-//         cb(null,"./uploads");
-//     },
-//     filename:(req,file,cb)=>{
-//         cb(null,Date.now().toString()+".jpg");
-//     }
-// });
-
-// const FileFilter = (req,file,cb)=>{
-//     if(file.mimetype=='image/jpg'||file.mimetype=='image/png'){
-//         cb(null,true);
-//     }
-//         else{
-//          cb(null,false);   
-//         }
-//     };
-
-//  const upload = multer({
-//      storage:storage,
-//      limits:{
-//          fileSize:1024 * 1024 * 6,
-//      }
-//  });
-
 aws.config.update({
     accessKeyId: process.env.aws_access_key_id,
     secretAccessKey: process.env.aws_secret_access_key
@@ -68,10 +43,15 @@ const upload = multer({
     }); 
   });
 
-router.post('/addMeme', async (req, res) => {
+router.route('/addMeme').post( async (req, res) => {
     const addMeme = new AddMeme({
         imgUrl: req.body.imgUrl,
         catname: req.body.catname,
+        images:[
+            {
+                url:req.body.images[0].url
+            }
+        ]
     });
     try {
         const savedMeme = await addMeme.save();
