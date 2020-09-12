@@ -47,11 +47,7 @@ router.route('/addMeme').post( async (req, res) => {
     const addMeme = new AddMeme({
         imgUrl: req.body.imgUrl,
         catname: req.body.catname,
-        images:[
-            {
-                url:req.body.images[0].url
-            }
-        ]
+        images:[],
     });
     try {
         const savedMeme = await addMeme.save();
@@ -63,7 +59,18 @@ router.route('/addMeme').post( async (req, res) => {
     }
 });
 
-router.post('/genMeme', async (req, res) => {
+router.route('/addMeme/:catname').patch(async (req,res) => {
+    try{
+        
+    const kmeme= await AddMeme.findOneAndUpdate({catname:req.params.catname}, { $push:{images:{"url":req.body.url}}});
+    res.json(kmeme);
+    }
+    catch(err){
+        res.json({msg:err});
+    }
+});
+
+router.route('/genMeme').post( async (req, res) => {
     const genMeme = new GenMeme({
         imgUrl: req.body.imgUrl,
     });
@@ -76,7 +83,7 @@ router.post('/genMeme', async (req, res) => {
     }
 
 });
-router.post('/newcat', async (req, res) => {
+router.route('/newcat').post( async (req, res) => {
     const newcat = new NewCat({
         imgUrl: req.body.imgUrl,
         catname: req.body.catname
