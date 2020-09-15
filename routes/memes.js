@@ -124,6 +124,7 @@ router.get('/genMeme', async (req, res) => {
     { 
   const fPost= await genMeme.find({});
   res.json(fPost);
+  
   }catch(err){
         res.json({message:err});
     }
