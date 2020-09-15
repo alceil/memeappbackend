@@ -107,6 +107,27 @@ router.post('/newcat', async (req, res) => {
     } catch (err) {
         res.json({ msg: err });
     }
-})
+});
+
+router.get('/addMeme', async (req, res) => {
+    try
+    { 
+  const fPost= await AddMeme.find({});
+  res.json(fPost);
+  }catch(err){
+        res.json({message:err});
+    }
+});
+
+router.get('/genMeme', async (req, res) => {
+    try
+    { 
+  const fPost= await genMeme.find({});
+  res.json(fPost);
+  }catch(err){
+        res.json({message:err});
+    }
+});
+
 
 module.exports = router;
