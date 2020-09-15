@@ -8,7 +8,10 @@ const AddMeme = Schema(
         },
         catname:{
             type:String,
-        }
+        },
+        images:[{
+            url:String
+        }]
     }
 );
 
