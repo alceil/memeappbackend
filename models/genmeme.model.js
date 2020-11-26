@@ -6,6 +6,9 @@ const GenMeme = Schema(
             type:String,
             default:""
         },
+        memename:{
+            type:String,
+        }
     }
 );
 

@@ -10,7 +10,8 @@ const AddMeme = Schema(
             type:String,
         },
         images:[{
-            url:String
+            url:String,
+            memename:String
         }]
     }
 );

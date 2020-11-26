@@ -4,6 +4,7 @@ const AddMeme = require('../models/AddMeme.model');
 const GenMeme = require('../models/genmeme.model');
 const aws = require('aws-sdk');
 const NewCat = require('../models/newcat.model');
+const MovPromo = require('../models/movPromo.model');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
 require('dotenv').config();
@@ -62,7 +63,7 @@ router.route('/addMeme').post( async (req, res) => {
 router.route('/addMeme/:catname').patch(async (req,res) => {
     try{
         
-    const kmeme= await AddMeme.findOneAndUpdate({catname:req.params.catname}, { $push:{images:{"url":req.body.url}}});
+    const kmeme= await AddMeme.findOneAndUpdate({catname:req.params.catname}, { $push:{images:{"url":req.body.url,"memename":req.body.memename}}});
     res.json(kmeme);
     }
     catch(err){
@@ -73,6 +74,7 @@ router.route('/addMeme/:catname').patch(async (req,res) => {
 router.route('/genMeme').post( async (req, res) => {
     const genMeme = new GenMeme({
         imgUrl: req.body.imgUrl,
+        memename:req.body.memename
     });
     try {
         const savedgenmeme = await genMeme.save();
@@ -83,6 +85,8 @@ router.route('/genMeme').post( async (req, res) => {
     }
 
 });
+
+
 router.route('/newcat').post( async (req, res) => {
     const newcat = new NewCat({
         imgUrl: req.body.imgUrl,
@@ -94,6 +98,23 @@ router.route('/newcat').post( async (req, res) => {
     } catch (err) {
         res.json({ msg: err });
     }
+});
+
+router.route('/movPromo').post( async (req, res) => {
+    const movPromo = new MovPromo({
+        'url':req.body.url,
+        'moviename': req.body.moviename,
+        'movUrl': req.body.movUrl
+    }
+    );
+    try {
+        const savedmovpromo = await movPromo.save();
+        res.json(savedmovpromo);
+    }
+    catch (err) {
+        res.json({ msg: err });
+    }
+
 });
 
 router.get('/addMeme', async (req, res) => {
@@ -109,7 +130,18 @@ router.get('/addMeme', async (req, res) => {
 router.get('/genMeme', async (req, res) => {
     try
     { 
-  const fPost= await genMeme.find({});
+  const fPost= await GenMeme.find({}).sort({createdAt:-1});
+  res.json(fPost);
+  
+  }catch(err){
+        res.json({message:err});
+    }
+});
+
+router.get('/movPromo', async (req, res) => {
+    try
+    { 
+  const fPost= await MovPromo.find({}).sort({createdAt:-1});
   res.json(fPost);
   
   }catch(err){
