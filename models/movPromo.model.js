@@ -4,7 +4,7 @@ const MovPromo = Schema(
     {
         url:{
             type:String,
-            default:""
+            // default:""
         },
         moviename:{
             type:String,
@@ -13,7 +13,7 @@ const MovPromo = Schema(
             type:String,
         },
 
-    }
+    }, { timestamps: true }
 );
 
 module.exports = mongoose.model("MovPromo",MovPromo);
