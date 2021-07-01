@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const AddMeme = require('../models/AddMeme.model');
 const GenMeme = require('../models/genmeme.model');
+const HindiMeme = require('../models/hindimeme.model');
 const aws = require('aws-sdk');
 const NewCat = require('../models/newcat.model');
 const MovPromo = require('../models/movPromo.model');
@@ -87,6 +88,23 @@ router.route('/genMeme').post( async (req, res) => {
 });
 
 
+
+router.route('/hindiMeme').post( async (req, res) => {
+    const hindiMeme = new HindiMeme({
+        imgUrl: req.body.imgUrl,
+        memename:req.body.memename
+    });
+    try {
+        const savedhindimeme = await hindiMeme.save();
+        res.json(savedhindimeme);
+    }
+    catch (err) {
+        res.json({ msg: err });
+    }
+
+});
+
+
 router.route('/newcat').post( async (req, res) => {
     const newcat = new NewCat({
         imgUrl: req.body.imgUrl,
@@ -121,6 +139,18 @@ router.get('/addMeme', async (req, res) => {
     try
     { 
   const fPost= await AddMeme.find({});
+  res.json(fPost);
+  }catch(err){
+        res.json({message:err});
+    }
+});
+
+
+
+router.get('/hindiMeme', async (req, res) => {
+    try
+    { 
+  const fPost= await HindiMeme.find({});
   res.json(fPost);
   }catch(err){
         res.json({message:err});
