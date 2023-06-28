@@ -185,7 +185,10 @@ router.route('/movPromo').post( async (req, res) => {
 router.get('/addMeme', async (req, res) => {
     try
     { 
-  const fPost= await AddMeme.find({});
+  const fPost= await AddMeme
+  .find({})
+  .sort({ _id: -1 });
+  
   res.json(fPost);
   }catch(err){
         res.json({message:err});
