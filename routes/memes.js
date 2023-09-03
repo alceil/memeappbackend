@@ -11,6 +11,7 @@ const NewHindiCat = require('../models/newhindicat');
 const MovPromo = require('../models/movPromo.model');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
+const trendingModels = require('../models/trending.models');
 require('dotenv').config();
 
 aws.config.update({
@@ -116,7 +117,21 @@ router.route('/genMeme').post( async (req, res) => {
     catch (err) {
         res.json({ msg: err });
     }
+});
 
+router.route('/trending').post( async (req, res) => {
+    const genMeme = new trendingModels({
+        imgUrl: req.body.imgUrl,
+        memename:req.body.memename
+    });
+    try {
+        const savedgenmeme = await genMeme.save();
+        res.json(savedgenmeme);
+    }
+    catch (err) {
+        
+        res.json({ msg: err });
+    }
 });
 
 
@@ -238,6 +253,19 @@ router.get('/movPromo', async (req, res) => {
         res.json({message:err});
     }
 });
+
+router.get('/trending', async (req, res) => {
+    try
+    { 
+  const fPost= await trendingModels.find({});
+  console.log(fPost)
+  res.json(fPost);
+  
+  }catch(err){
+        res.json({message:err});
+    }
+});
+
 
 
 module.exports = router;
